@@ -36,7 +36,8 @@ Javascript DOM manipulation.
 
 Welcome Page
 
-<img width="1093" alt="Screen Shot 2023-03-05 at 3 10 33 PM" src="https://user-images.githubusercontent.com/101619380/222983376-0c5f29a9-321f-45ab-95d5-6404e1edf013.png">
+<img width="995" alt="Screen Shot 2023-03-05 at 3 11 58 PM" src="https://user-images.githubusercontent.com/101619380/222983440-003d9f4b-8628-4c6f-870b-76f1f11ba6eb.png">
+
 
 
 Data Entry Page
