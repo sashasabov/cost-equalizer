@@ -16,7 +16,7 @@ This app is designed to help user to even out expenses.
 
 
 ## Technologies used:
-- For visual contant generator I used DALL-E 2: https://openai.com/product/dall-e-2
+- For visual contant I used DALL-E-2: https://openai.com/product/dall-e-2
 
 ## Front-end
 HTML
