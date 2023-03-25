@@ -1,38 +1,59 @@
 
 const btnAddEntry = document.getElementById("addEntry");
-const btnCalculate = document.getElementById("Calculate");
+const btnCalculate = document.getElementById("CalculateBtn");
+const btnStartOver = document.getElementById("StartOverBtn");
 const listOfEntries = document.getElementById("listOfEntries");
 const listOfResults = document.getElementById("listOfResults");
 const totalSpentElement = document.getElementById("total");
+const equalAmountElement = document.getElementById("equalAmount");
 const nameInput = document.getElementById("name");
 const amountInput = document.getElementById("amount");
 let total = 0;
-
 let arrOfEntries = [];
 
 // Adding event listener for AddEntry button
 btnAddEntry.addEventListener("click", () => {
+    
     const name = nameInput.value.trim();
     const amount = parseFloat(amountInput.value.trim());
 
-    if (!name || isNaN(amount) || amount <= 0) {
+    if (!name || isNaN(amount) || amount < 0) {
         alert("Please enter a valid name and amount.");
         return;
     }
     
     const person = { name, amount };
     const entry = document.createElement('li');
-    entry.innerHTML = `${person.name} - $${person.amount.toFixed(2)}`;
-    listOfEntries.appendChild(entry);
-    arrOfEntries.push(person);
+    entry.id = person.name;
+// Check if there was no entry with the same name
+    if(arrOfEntries.some(e => e.name == name) == true){
+    const entryToUpdate = arrOfEntries.find(entry => entry.name == name)
+    entryToUpdate.amount += person.amount;
+    document.getElementById(name).innerHTML = `${person.name} spent $${entryToUpdate.amount.toFixed(2)}`;
+    }
+    else {
+        entry.innerHTML = `${person.name} spent $${person.amount.toFixed(2)}`;
+        listOfEntries.appendChild(entry);
+        arrOfEntries.push(person);
+        if(arrOfEntries.length > 0){
+            document.getElementById("tally").style.display = "inline-block";
+        }
+        if(arrOfEntries.length > 1){
+            document.getElementById("CalculateBtn").style.display = "inline-block";
+        }
+    }
+    // edit/save button code here
     
-    const totalSpent = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
-    totalSpentElement.innerHTML = `$${totalSpent.toFixed(2)}`;
-    total = totalSpent;
+    total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
+    totalSpentElement.innerHTML = `$${total.toFixed(2)}`;
+    const equalAmount = (total / arrOfEntries.length).toFixed(2);
+    equalAmountElement.innerHTML = `$${equalAmount}`;
 
     nameInput.value = "";
     amountInput.value = "";
-    
+
+    recalcEntries = [...arrOfEntries];
+
 });
 
 
@@ -50,7 +71,6 @@ function creditorsMore(array1, array2){
             result.innerHTML = `${debtorGreater.name} owes $${amountOwed.toFixed(2)} to ${creditor.name}`;
             listOfResults.appendChild(result);
         }   
-
         else if (debtorLess){                
             creditor.balance += debtorLess.balance;
             const result = document.createElement("li");
@@ -61,236 +81,146 @@ function creditorsMore(array1, array2){
     })
 }
 
-btnCalculate.addEventListener("click", () => {
-    console.log("array of entries:", arrOfEntries)
-    const equalAmount = (total / arrOfEntries.length).toFixed(2);
+function debtorsMore(array1, array2){
 
+    array1.forEach((debtor) => {
+        let amountToReturn = debtor.balance;
+        const creditorGreater = array2.find((creditor) => Math.abs(creditor.balance) >= amountToReturn);
+        const creditorLess = array2.find((creditor) => Math.abs(creditor.balance) < amountToReturn);
+                    
+        if (creditorGreater) {
+            creditorGreater.balance += amountToReturn;
+            debtor.balance = 0; 
+            const result = document.createElement("li");
+            result.innerHTML = `${debtor.name} owes $${amountToReturn.toFixed(2)} to ${creditorGreater.name}`;
+            listOfResults.appendChild(result);
+        }   
+        else if (creditorLess) {                
+            debtor.balance += creditorLess.balance;
+            const result = document.createElement("li");
+            result.innerHTML = `${debtor.name} owes $${Math.abs(creditorLess.balance).toFixed(2)} to ${creditorLess.name}`;
+            listOfResults.appendChild(result);
+            creditorLess.balance = 0;
+        }        
+    }) 
+}
+
+// Adding event listener for Calculate button
+btnCalculate.addEventListener("click", () => {
+
+    document.getElementById("CalculateBtn").style.display = "none";
+    document.getElementById("StartOverBtn").style.display = "inline-block";
+    document.getElementById("name").style.display = "none";
+    document.getElementById("amount").style.display = "none";
+    document.getElementById("addEntry").style.display = "none";
+    document.querySelector("label").style.display = "none";
+    // document.getElementById("editBtn").style.display = "none";
+    // let node = document.getElementById("editBtn");
+    // if (node.parentNode){node.parentNode.removeChild(node)}
+    const equalAmount = (total / arrOfEntries.length).toFixed(2);
     arrOfEntries.forEach((entry) => {
     entry.balance = parseFloat((equalAmount - entry.amount).toFixed(2));
     });
-    
     const creditors = arrOfEntries.filter((entry) => entry.balance < 0);
     const debtors = arrOfEntries.filter((entry) => entry.balance >= 0);
-
-    console.log("Equal amount: " + equalAmount)
-    // let debtorBalance = debtors.reduce((sum, debtor) => sum + debtor.balance, 0)
-
-    console.log("length of array:", arrOfEntries.length)
-
-    
-    
-    if (creditors.length > debtors.length){
-        console.log("creditors more than debtors")
+       
+    if (creditors.length >= debtors.length){
         creditorsMore(creditors, debtors);   
     }
 
     else if (creditors.length < debtors.length){  
-        console.log("creditors less than debtors")
-            
-        debtors.forEach((debtor) => {
-            
-            let amountToReturn = debtor.balance;
-            const creditorGreater = creditors.find((creditor) => Math.abs(creditor.balance) >= amountToReturn);
-            const creditorLess = creditors.find((creditor) => Math.abs(creditor.balance) < amountToReturn);
-                        
-            if (creditorGreater) {
-                creditorGreater.balance += amountToReturn;
-                debtor.balance = 0; 
-                const result = document.createElement("li");
-                result.innerHTML = `${debtor.name} owes $${amountToReturn.toFixed(2)} to ${creditorGreater.name}`;
-                listOfResults.appendChild(result);
-            }   
-
-            else if (creditorLess) {                
-                debtor.balance += creditorLess.balance;
-                const result = document.createElement("li");
-                result.innerHTML = `${debtor.name} owes $${Math.abs(creditorLess.balance).toFixed(2)} to ${creditorLess.name}`;
-                listOfResults.appendChild(result);
-                creditorLess.balance = 0;
-            }        
-        })  
-        arrOfEntries = arrOfEntries.filter((entry) => entry.balance > 0.01 || entry.balance < -0.01);
-        arrOfEntries.sort((a,b) => (a.balance - b.balance))
-        console.log(arrOfEntries);
-        
+        debtorsMore(debtors, creditors)
     }
 
-    else if (creditors.length == debtors.length){
+// Filtering out array entries with non-zero balance
+    arrOfEntries = arrOfEntries.filter((entry) => entry.balance > 0.01 || entry.balance < -0.01);
+    arrOfEntries.sort((a,b) => (a.balance - b.balance))
 
-        console.log("length equal")  
-        // if (arrOfEntries.length > 1){
-            creditorsMore(creditors, debtors);
-            arrOfEntries = arrOfEntries.filter((entry) => entry.balance > 0.01 || entry.balance < -0.01);
-        arrOfEntries.sort((a,b) => (a.balance - b.balance))
-        console.log(arrOfEntries);
-        // }  
-        // need code below?
-    //     else { 
-    //     creditors.sort((a,b) => a.balance - b.balance);
-    //     debtors.sort((a,b) => a.balance - b.balance);
-    //     creditors[0].balance += debtors[0].balance;
-    //     const result = document.createElement("li");
-    //     result.innerHTML = `${debtors[0].name} owes $${debtors[0].balance.toFixed(2)} to ${creditors[0].name}`;
-    //     listOfResults.appendChild(result);
-    //     arrOfEntries.splice(debtors[0], 1);
-    //     debtors.splice(debtors[0], 1);
-    // } 
-
-                  
-    }
     if (arrOfEntries.length == 2){
-        console.log("length equal 2")
         arrOfEntries[0].balance += arrOfEntries[1].balance;
         const result = document.createElement("li");
         result.innerHTML = `${arrOfEntries[1].name} owes $${arrOfEntries[1].balance.toFixed(2)} to ${arrOfEntries[0].name}`;
         listOfResults.appendChild(result);
-    }
-    
+    }    
 })
 
-//     arrOfEntries.forEach((person) => {
+btnStartOver.addEventListener("click", () => {
 
-    //         let debtorBalanceNotZero = debtors.find((debtor) => debtor.balance > 0);
-    //         let creditorBalanceNotZero = creditors.find((creditor) => Math.abs(creditor.balance) > 0);
+    while(listOfEntries.firstChild) listOfEntries.removeChild(listOfEntries.firstChild);
+    const ul = document.getElementById("tally");
+    ul.style.display = "none";
+    while(listOfResults.firstChild) listOfResults.removeChild(listOfResults.firstChild);
 
-    //         console.log("debtorBalanceNotZero", debtorBalanceNotZero);
-    //         console.log("creditorBalanceNotZero", creditorBalanceNotZero);
+    document.getElementById("name").style.display = "inline-block";
+    document.getElementById("amount").style.display = "inline-block";
+    document.getElementById("addEntry").style.display = "inline-block";
+    document.querySelector("label").style.display = "inline-block";
 
-    //         const creditorGreater = creditors.find((creditor) => Math.abs(creditor.balance) >= debtorBalanceNotZero.balance);
-    //         const creditorLess = creditors.find((creditor) => Math.abs(creditor.balance) < debtorBalanceNotZero.balance);
-    //         const debtorGreater = debtors.find((debtor) => debtor.balance >= Math.abs(creditorBalanceNotZero.balance));
-    //         const debtorLess = debtors.find((debtor) => debtor.balance < Math.abs(creditorBalanceNotZero.balance));
+    document.getElementById("StartOverBtn").style.display = "none";
+    arrOfEntries = [];
+    total = 0;
+})
+
+
+
+//create editBtn
+    // const editBtn = document.createElement("button");
+    // editBtn.innerText = "Edit";
+    // editBtn.id = "editBtn";
+    // // editBtn.id = "update" + name;
+    // entry.appendChild(editBtn);
+
+    // // Add click event to editBtn
+    // editBtn.addEventListener("click", () => {
+
+    //     btnStartOver.style.display = "none";
+    //     btnCalculate.style.display = "inline-block";
+
+    //     entry.replaceChildren();
+    //     const inputName = document.createElement('input');
+    //     inputName.id = name;
+    //     inputName.type = "text";
+    //     inputName.value = name;
+    //     const inputAmount = document.createElement("input");
+    //     inputAmount.value = person.amount;
+    //     inputAmount.id = name;
+    //     inputAmount.type = "number";
+
+    //     // create saveBtn
+    //     const saveBtn = document.createElement("button");
+    //     saveBtn.innerText = "Save";
+    //     saveBtn.id = "save" + name;
+        
+    //     entry.appendChild(inputName);
+    //     entry.appendChild(inputAmount);
+    //     entry.appendChild(saveBtn);
+
+    //     // Add click event to saveBtn
+    //     saveBtn.addEventListener("click", () => {
             
+    //         let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
+    //         const updatedName = inputName.value.trim();
+    //         const updatedAmount = parseFloat(inputAmount.value.trim());
 
-    //         if (creditorLess) {    
-    //         // if (person.balance < 0 && Math.abs(person.balance) < debtorBalanceNotZero) {    
-    //             debtorBalanceNotZero.balance += (person.balance + 0.01);                           
-    //             const result = document.createElement("li");
-    //             result.innerHTML = `${debtorBalanceNotZero.name} owes $${Math.abs(person.balance).toFixed(2)} to ${person.name}`;
-    //             listOfResults.appendChild(result);  
-    //             person.balance = 0;  
-    //             console.log('case 1')            
-    //         } 
+    //     if (!updatedName || isNaN(updatedAmount) || updatedAmount < 0) {
+    //         alert("Please enter a valid name and amount.");
+    //         return;
+    //     }
+
+    //         arrOfEntries[objIndex].name = updatedName;
+    //         arrOfEntries[objIndex].amount = updatedAmount;
+    //         entry.replaceChildren();           
+    //         entry.id = updatedName;
+    //         editBtn.id = "update" + updatedName;
             
-    //         else if (creditorGreater) { 
-    //         // else if (person.balance < 0 && Math.abs(person.balance) > debtorBalanceNotZero) {
-    //             person.balance += debtorBalanceNotZero.balance;               
-    //             const result = document.createElement("li");
-    //             result.innerHTML = `${debtorBalanceNotZero.name} owes $${debtorBalanceNotZero.balance.toFixed(2)} to ${person.name}`;
-    //             listOfResults.appendChild(result);
-    //             debtorBalanceNotZero.balance = 0.01; 
-    //             console.log('case 2')
-    //         }             
-
-    //         else if (debtorGreater) {
-    //         // else if (person.balance >= 0 && Math.abs(person.balance) > creditorBalanceNotZero) {
-    //             person.balance += creditorBalanceNotZero.balance;         
-    //             const result = document.createElement("li");
-    //             result.innerHTML = `${person.name} owes $${Math.abs(creditorBalanceNotZero.balance).toFixed(2)} to ${creditorBalanceNotZero.name}`;
-    //             listOfResults.appendChild(result);
-    //             creditorBalanceNotZero.balance = 0.01;
-    //             console.log('case 3')
-    //         }   
-
-    //         else if (debtorLess){               
-    //         // else if (person.balance >= 0 && Math.abs(person.balance) < creditorBalanceNotZero){               
-    //             creditorBalanceNotZero.balance += (person.balance + 0.01);                
-    //             const result = document.createElement("li");
-    //             result.innerHTML = `${person.name} owes $${person.balance.toFixed(2)} to ${creditorBalanceNotZero.name}`;
-    //             listOfResults.appendChild(result);
-    //             person.balance = 0;
-    //             console.log('case 4') 
-    //         }
+    //         entry.innerHTML = `${updatedName} spent $${updatedAmount.toFixed(2)}`;
+    //         entry.appendChild(editBtn)
+    //         total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
+    //         totalSpentElement.innerHTML = `$${total.toFixed(2)}`;
+    //         const equalAmount = (total / arrOfEntries.length).toFixed(2);
+    //         equalAmountElement.innerHTML = `$${equalAmount}`;
     //     })
+    // });
 
-
-// 1 --------------------------------------------------------------------
-
-//     while( debtorBalance > 0.01){
-
-//     creditors.forEach((creditor) => {
-//     let amountOwed = Math.abs(creditor.balance);
-
-//     const debtorGreater = debtors.find((debtor) => debtor.balance >= amountOwed);
-//     const debtorLess = debtors.find((debtor) => debtor.balance < amountOwed);
-
-//     if (debtorGreater && debtorGreater != 0 && amountOwed != 0) {
-//         debtorGreater.balance = parseFloat((debtorGreater.balance - amountOwed).toFixed(2));
-//         debtorBalance = parseFloat((debtorBalance - amountOwed).toFixed(2));
-//         console.log("debtorGreater balance:", debtorGreater.balance, "-", amountOwed);
-//         creditor.balance = 0;
-//         console.log("debtorBalance (greater):", debtorBalance)
-//         const result = document.createElement("li");
-//         result.innerHTML = `${debtorGreater.name} owes $${amountOwed} to ${creditor.name}`;
-//         listOfResults.appendChild(result);
-//     }
-
-//     else if (debtorLess && debtorLess != 0 && amountOwed != 0) {    
-        
-//         creditor.balance = parseFloat((creditor.balance + debtorLess.balance).toFixed(2));           
-//         const result = document.createElement("li");
-//         result.innerHTML = `${debtorLess.name} owes $${debtorLess.balance} to ${creditor.name}`;
-//         listOfResults.appendChild(result);
-//         debtorLess.balance = 0;  
-//         debtorBalance = parseFloat((debtorBalance - debtorLess.balance).toFixed(2));
-//         console.log("debtorBalance:", debtorBalance)
-//         }  
-//     });
-// }
-//     });
-
-
-// 2 -------------------------------------------------------------------
-
-// Adding event listener for Calculate button
-// btnCalculate.addEventListener("click", () => {
-//     const equalAmount = total / arrOfEntries.length;
-//     arrOfEntries.forEach( e => e.balance = equalAmount - e.amount )
-//     console.log(arrOfEntries);
-//     let owed = 0;
-//     for(let i = 0; i < arrOfEntries.length-1; i++){
-//         for(let j = 1; j < arrOfEntries.length; j++){
-//             if (arrOfEntries[i].balance < 0 && Math.abs(arrOfEntries[i].balance) < arrOfEntries[j].balance){
-//                     owed = arrOfEntries[i].balance;
-//                     arrOfEntries[j].balance += arrOfEntries[i].balance;
-//                     arrOfEntries[i].balance = 0;
-                
-//                     const result = document.createElement("li");
-//                     result.innerHTML = `${arrOfEntries[j].name} owes ${owed} to ${arrOfEntries[i].name}`
-//                     listOfResults.appendChild(result)
-//             }
-//             else if(arrOfEntries[i].balance < 0 && Math.abs(arrOfEntries[i].balance) > arrOfEntries[j].balance){
-//                     owed = arrOfEntries[j].balance;
-//                     arrOfEntries[i].balance += arrOfEntries[j].balance;
-//                     arrOfEntries[j].balance = 0; 
-                    
-//                     const result = document.createElement("li");
-//                     result.innerHTML = `${arrOfEntries[j].name} owes ${owed} to ${arrOfEntries[i].name}`
-//                     listOfResults.appendChild(result)
-//             }
-//             else if(arrOfEntries[j].balance < 0 && Math.abs(arrOfEntries[j].balance) > arrOfEntries[i].balance){
-//                 owed = arrOfEntries[i].balance;
-//                 arrOfEntries[j].balance += arrOfEntries[i].balance;
-//                 arrOfEntries[i] = 0;
-
-//                 const result = document.createElement("li");
-//                 result.innerHTML = `${arrOfEntries[i].name} owes ${owed} to ${arrOfEntries[j].name}`
-//                 listOfResults.appendChild(result)
-//             }
-//             else if(arrOfEntries[j].balance < 0 && Math.abs(arrOfEntries[j].balance) < arrOfEntries[i].balance){
-//                 owed = arrOfEntries[j].balance;
-//                 arrOfEntries[j].balance += arrOfEntries[i].balance;
-//                 arrOfEntries[j] = 0;
-
-//                 const result = document.createElement("li");
-//                 result.innerHTML = `${arrOfEntries[i].name} owes ${owed} to ${arrOfEntries[j].name}`
-//                 listOfResults.appendChild(result)
-//             }
-
-//         }
-        
-//     }
-
-// })
 
 
