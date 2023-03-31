@@ -1,5 +1,5 @@
 
-const btnAddEntry = document.getElementById("addEntry");
+const btnAddEntry = document.getElementById("addEntryBtn");
 const btnCalculate = document.getElementById("CalculateBtn");
 const btnStartOver = document.getElementById("StartOverBtn");
 const listOfEntries = document.getElementById("listOfEntries");
@@ -21,11 +21,11 @@ btnAddEntry.addEventListener("click", () => {
         alert("Please enter a valid name and amount.");
         return;
     }
-    
+    document.getElementById("entriesBox").style.display = "flex";
     const person = { name, amount };
     const entry = document.createElement('li');
     entry.id = person.name;
-// Check if there was no entry with the same name
+    // Check if there was no entry with the same name
     if(arrOfEntries.some(e => e.name == name) == true){
     const entryToUpdate = arrOfEntries.find(entry => entry.name == name)
     entryToUpdate.amount += person.amount;
@@ -37,6 +37,7 @@ btnAddEntry.addEventListener("click", () => {
         arrOfEntries.push(person);
         if(arrOfEntries.length > 0){
             document.getElementById("tally").style.display = "inline-block";
+           
         }
         if(arrOfEntries.length > 1){
             document.getElementById("CalculateBtn").style.display = "inline-block";
@@ -45,9 +46,9 @@ btnAddEntry.addEventListener("click", () => {
     // edit/save button code here
     
     total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
-    totalSpentElement.innerHTML = `$${total.toFixed(2)}`;
+    totalSpentElement.innerHTML = `Total: $${total.toFixed(2)}`;
     const equalAmount = (total / arrOfEntries.length).toFixed(2);
-    equalAmountElement.innerHTML = `$${equalAmount}`;
+    equalAmountElement.innerHTML = `Per Person: $${equalAmount}`;
 
     nameInput.value = "";
     amountInput.value = "";
@@ -107,13 +108,14 @@ function debtorsMore(array1, array2){
 
 // Adding event listener for Calculate button
 btnCalculate.addEventListener("click", () => {
-
+    
+    document.getElementById("resultsBox").style.display = "flex";
     document.getElementById("CalculateBtn").style.display = "none";
     document.getElementById("StartOverBtn").style.display = "inline-block";
     document.getElementById("name").style.display = "none";
     document.getElementById("amount").style.display = "none";
-    document.getElementById("addEntry").style.display = "none";
-    document.querySelector("label").style.display = "none";
+    document.getElementById("addEntryBtn").style.display = "none";
+    // document.querySelector("label").style.display = "none";
     // document.getElementById("editBtn").style.display = "none";
     // let node = document.getElementById("editBtn");
     // if (node.parentNode){node.parentNode.removeChild(node)}
@@ -153,9 +155,9 @@ btnStartOver.addEventListener("click", () => {
 
     document.getElementById("name").style.display = "inline-block";
     document.getElementById("amount").style.display = "inline-block";
-    document.getElementById("addEntry").style.display = "inline-block";
-    document.querySelector("label").style.display = "inline-block";
-
+    document.getElementById("addEntryBtn").style.display = "inline-block";
+    document.getElementById("resultsBox").style.display = "none";
+    document.getElementById("entriesBox").style.display = "none";
     document.getElementById("StartOverBtn").style.display = "none";
     arrOfEntries = [];
     total = 0;

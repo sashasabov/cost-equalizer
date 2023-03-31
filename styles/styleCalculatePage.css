@@ -1,0 +1,164 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a7744e;
+    padding: 3vh 0;
+    text-align: center;
+}
+
+main {
+    height: 90vh;
+    width: 80vw;
+    min-width: 340px;
+    max-height: 900px;
+    display: grid;
+    flex-direction: column;
+    background-color:white;
+    grid-template-rows: 1fr 1fr 1fr 0.5;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 25px;
+    box-shadow: 0 3px 10px black;
+    background-image: url(".././assets/background-pencils.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items:start;
+}
+
+#CalculateBtn, #StartOverBtn {
+    display: none;
+}
+
+.input-box {
+    grid-row: 2;
+    grid-column: 1;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 20vh;
+    margin-top: 0;
+}
+
+#entriesBox, input, #addEntryBtn, #CalculateBtn, #StartOverBtn, #resultsBox {
+    border-radius: 15px;
+    /* font-size: 2.5vh; */
+    font-size: 40px;
+    border: 3px solid black;
+    box-shadow: 0 3px 3px black;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    margin: 8px 0;
+}
+
+#CalculateBtn, #StartOverBtn {
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: 20%;
+}
+
+input {
+    font-family: 'Courier New', Courier, monospace;
+    height: 10vh;
+    width: 35%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+}
+
+input:focus{
+    /* border: 5px solid black; */
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0 50px white inset !important;
+}
+
+#addEntryBtn, #CalculateBtn, #StartOverBtn {
+    font-family: 'Geogia', Courier, monospace;
+    height: 10vh;
+    color: white;
+    background-color: #6f6b8d;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#addEntryBtn:focus {
+    /* box-shadow: 0 1px 1px black; */
+    box-shadow: none;
+}
+
+#StartOverBtn {
+    grid-row: 2;
+    grid-column: 1;
+    align-self: end;
+    margin-bottom: 10vh;
+}
+
+#entriesBox {
+    display: none;
+    grid-row: 1;
+    grid-column: 1;
+    background-color: white;
+    width: 50%;
+    height: auto;
+    /* font-size: 2vh; */
+    font-size: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    place-self: center;
+}
+
+#resultsBox {
+    display: none;
+    grid-row: 2;
+    grid-column: 1;
+    background-color: white;
+    width: 50%;
+    height: auto;
+    /* max-height: 10vh; */
+    font-size: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+#listOfResults{
+    text-align: left;
+}
+
+li{
+    padding: 2px;
+    list-style-type: none;
+}
+
+#listOfEntries, #tally {
+    padding-bottom: 10px;
+    padding-right: 40px;
+    border-bottom-style: dotted;
+    text-align: left;
+    
+}
+
+#tally {
+    border-bottom-style: none;
+    margin: 0 0;
+}
+
+
+

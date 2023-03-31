@@ -4,33 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/styleCalculatePage.css">
     <title>CostEqualizer</title>
 </head>
 <body>
-    <ul id="listOfEntries" style="border-bottom:dotted"></ul> 
 
-    <ul id="tally">
-        <li style="display: inline;">Total:</li>
-        <li id="total" style="display: inline;"></li>
-        <li></li>
-        <li style="display: inline;">Per Person:</li>
-        <li id="equalAmount" style="display: inline;" ></li>
-    </ul><br>
+    <main>
 
-    <input type="text" placeholder="Name" id="name">
-    <label for="amount">spent $</label>
-    <input type="number" placeholder="Amount" id="amount">
-    <button id="addEntry">Add Entry</button>
-    
-    <p>
+        <div id="entriesBox">
+            <ul id="listOfEntries"></ul> 
+            <ul id="tally">
+                <li id="total"></li>
+                <li id="equalAmount"></li>
+            </ul><br>
+        </div>
+
+        <div class="input-box">
+            <input type="text" placeholder="Name" id="name">
+            <input type="number" placeholder="Amount" id="amount">
+            <button id="addEntryBtn">+</button>
+        </div>  
+
         <button id="CalculateBtn">Calculate</button>
-    </p>
 
-    <ul id="listOfResults"></ul>
+        <div id="resultsBox">
+            <ul id="listOfResults"></ul>
+        </div>
+        
+        <button id="StartOverBtn">Start Over</button>
+        
+        <script src="scripts/dataEntry.js"></script>
+    </main>
 
-    <button id="StartOverBtn">Start Over</button>
-    
-    <script src="scripts/dataEntry.js"></script>
 </body>
 </html>
