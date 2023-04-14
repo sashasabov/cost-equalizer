@@ -4,39 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styleCalculatePage.css">
+    <link rel="stylesheet" href="styles/styleWelcomePage.css">
     <title>CostEqualizer</title>
 </head>
 <body>
 
     <main>
-        <div id="entriesBox">
-            <div class="scrollBox">
-                <ul id="listOfEntries"></ul> 
-                <ul id="tally">
-                    <li id="total"></li>
-                    <li id="equalAmount"></li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="input-box">
-            <input type="text" placeholder="Name" id="name">
-            <input type="number" placeholder="0.00" id="amount">
-            <button id="addEntryBtn">+</button>
-        </div>  
-
-        <button id="CalculateBtn">Calculate</button>
-
-        <div id="resultsBox">
-            <div class="scrollBox">
-                <ul id="listOfResults"></ul>
-            </div>
-        </div>
         
-        <button id="StartOverBtn">Start Over</button>
+        <img src="assets/womanshare.png" alt="Woman Exchange Money" id="img-woman">
         
-        <script src="scripts/dataEntry.js"></script>
+        <section>
+            <h1 class="welcome">Welcome to CostEqualizer!</h1>
+            <a href="index.html"><img src="assets/startBtn.png" alt="Start Button" id="startBtnImg"></a>
+        </section>
+
+        <aside>
+            <b><p>To my mother-in-law dedicated:</p>
+                <p>
+                    <i><q>This app may take away valuable job from you, but now you have more time to spend with your grandchildren.</q></i>
+                </p>
+            </b>
+        </aside>
+
+        <img src="assets/manshare.png" alt="Man Exchange Money" id="img-man">
     </main>
 
 </body>
