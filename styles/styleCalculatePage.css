@@ -42,7 +42,6 @@ main {
 
 #entriesBox, input, #addEntryBtn, #CalculateBtn, #StartOverBtn, #resultsBox {
     border-radius: 15px;
-    
     border: 3px solid black;
     box-shadow: 0 3px 3px black;
     -webkit-transition: 0.5s;
@@ -79,7 +78,6 @@ input:-webkit-autofill {
 #addEntryBtn, #CalculateBtn, #StartOverBtn {
     font-family: 'Geogia', Courier, monospace;
     height: 60px;
-    width: 60px;
     color: white;
     background-color: #6f6b8d;
     outline: none;
@@ -102,6 +100,8 @@ input:-webkit-autofill {
 
 #addEntryBtn{
     font-size: 40px;
+    width: 60px;
+    text-align: center;
 }
 
 #StartOverBtn {
