@@ -1,6 +1,6 @@
 # cost-equalizer
 
-Site link will be here.
+Site: https://sashasabov.github.io/cost-equalizer/
 
 ## Project idea
 
