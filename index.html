@@ -10,25 +10,28 @@
 <body>
 
     <main>
-
         <div id="entriesBox">
-            <ul id="listOfEntries"></ul> 
-            <ul id="tally">
-                <li id="total"></li>
-                <li id="equalAmount"></li>
-            </ul><br>
+            <div class="scrollBox">
+                <ul id="listOfEntries"></ul> 
+                <ul id="tally">
+                    <li id="total"></li>
+                    <li id="equalAmount"></li>
+                </ul>
+            </div>
         </div>
 
         <div class="input-box">
             <input type="text" placeholder="Name" id="name">
-            <input type="number" placeholder="Amount" id="amount">
+            <input type="number" placeholder="0.00" id="amount">
             <button id="addEntryBtn">+</button>
         </div>  
 
         <button id="CalculateBtn">Calculate</button>
 
         <div id="resultsBox">
-            <ul id="listOfResults"></ul>
+            <div class="scrollBox">
+                <ul id="listOfResults"></ul>
+            </div>
         </div>
         
         <button id="StartOverBtn">Start Over</button>
