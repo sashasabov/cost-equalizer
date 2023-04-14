@@ -170,5 +170,10 @@ li {
     #entriesBox, #resultsBox {
         font-size: 20px;
     }
+
+    #addEntryBtn{
+        height: 60px;
+        width: 60px;
+    }
 }
 
