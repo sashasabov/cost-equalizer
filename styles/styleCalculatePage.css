@@ -83,7 +83,6 @@ input {
     font-size: 20px;
 }
 
-
 #amount{
     width: 200px;
     margin-bottom: 5px;
@@ -116,8 +115,8 @@ input:-webkit-autofill {
 #CalculateBtn, #StartOverBtn {
     grid-row: 2;
     grid-column: 1;
-    /* margin-bottom: 30px; */
-    margin-bottom: 5vh;
+   
+    margin-bottom: 10px;
     align-self: end;
     width: 200px;
     font-size: 20px;
@@ -132,6 +131,7 @@ input:-webkit-autofill {
     /* height: 60px; */
     width: 60px;
     padding: 0;
+    margin-bottom: 2px;
 }
 
 #StartOverBtn {
@@ -177,12 +177,7 @@ li {
     /* flex-wrap: wrap; */
     padding: 3px;
     list-style-type: none;
-    /* align-items: center; */
 }
-
-/* #listOfResults li{
-    border-bottom-style: dotted;
-} */
 
 #listOfEntries, #tally, #listOfResults {
     padding: 0 15px 10px 15px;
@@ -209,5 +204,10 @@ li {
         height: 60px;
         width: 60px;
     }
+
+    #CalculateBtn, #StartOverBtn{
+        margin-bottom: 30px; 
+    }
+   
 }
 
