@@ -116,7 +116,8 @@ input:-webkit-autofill {
 #CalculateBtn, #StartOverBtn {
     grid-row: 2;
     grid-column: 1;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
+    margin-bottom: 5vh;
     align-self: end;
     width: 200px;
     font-size: 20px;
