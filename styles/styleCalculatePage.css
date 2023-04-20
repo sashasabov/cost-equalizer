@@ -29,6 +29,31 @@ main {
     display: none;
 }
 
+#editBtn, #saveBtn {
+    border: none;
+    background-image: url(".././assets/edit.png");
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#saveBtn {
+    background-image: url(".././assets/save.png");
+}
+
+#editName, #editAmount {
+    display: inline-block;
+    border: 2px solid darkgrey;
+    box-shadow: none;
+    margin-right: 5px;
+    padding: 0;
+    margin: 5px;
+    text-align: center;
+    
+}
+
 .input-box {
     grid-row: 2;
     grid-column: 1;
@@ -57,6 +82,7 @@ input {
     outline: none;
     font-size: 20px;
 }
+
 
 #amount{
     width: 200px;
@@ -100,8 +126,9 @@ input:-webkit-autofill {
 
 #addEntryBtn{
     font-size: 40px;
+    /* height: 60px; */
     width: 60px;
-    text-align: center;
+    padding: 0;
 }
 
 #StartOverBtn {
@@ -142,8 +169,11 @@ input:-webkit-autofill {
 }
 
 li {
-    padding: 2px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    padding: 3px;
     list-style-type: none;
+    /* align-items: center; */
 }
 
 /* #listOfResults li{

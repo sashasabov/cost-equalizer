@@ -14,8 +14,8 @@ let arrOfEntries = [];
 // Adding event listener for AddEntry button
 btnAddEntry.addEventListener("click", () => {
     
-    const name = nameInput.value.trim();
-    const amount = parseFloat(amountInput.value.trim());
+    let name = nameInput.value.trim();
+    let amount = parseFloat(amountInput.value.trim());
 
     if (!name || isNaN(amount) || amount < 0) {
         alert("Please enter a valid name and amount.");
@@ -37,13 +37,68 @@ btnAddEntry.addEventListener("click", () => {
         arrOfEntries.push(person);
         if(arrOfEntries.length > 0){
             document.getElementById("tally").style.display = "inline-block";
-           
         }
         if(arrOfEntries.length > 1){
-            document.getElementById("CalculateBtn").style.display = "inline-block";
+            btnCalculate.style.display = "inline-block";
         }
     }
-    // edit/save button code here
+
+    // Create editBtn
+    const editBtn = document.createElement("button");
+    editBtn.id = "editBtn";
+    entry.appendChild(editBtn);
+
+    // Add click event to editBtn
+    editBtn.addEventListener("click", () => {
+
+        btnCalculate.style.display = "none";
+        entry.replaceChildren();
+        const inputName = document.createElement('input');
+        inputName.id = "editName";
+        inputName.type = "text";
+        inputName.value = name;
+        inputName.style.width = ((inputName.value.length + 8) * 8) + 'px';
+        const inputAmount = document.createElement("input");
+        inputAmount.value = person.amount;
+        inputAmount.style.width = ((inputAmount.value.length + 8) * 8) + 'px';
+        inputAmount.id = "editAmount";
+        inputAmount.type = "number";
+
+        // create saveBtn
+        const saveBtn = document.createElement("button");
+        saveBtn.id = "saveBtn"       
+         
+        entry.appendChild(inputName);
+        entry.appendChild(inputAmount);
+        entry.appendChild(saveBtn);
+
+        // Add click event to Save button
+        saveBtn.addEventListener("click", () => {
+            
+            let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
+            name = inputName.value.trim();
+            amount = parseFloat(inputAmount.value.trim());
+
+        if (!name || isNaN(amount) || amount < 0) {
+            alert("Please enter a valid name and amount.");
+            return;
+        }
+            
+            arrOfEntries[objIndex].name = name;
+            arrOfEntries[objIndex].amount = amount;
+            entry.replaceChildren();           
+            entry.id = name;
+            entry.innerHTML = `${name} spent $${amount.toFixed(2)}`;
+            entry.appendChild(editBtn)
+            total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
+            totalSpentElement.innerHTML = `Total: $${total.toFixed(2)}`;
+            const equalAmount = (total / arrOfEntries.length).toFixed(2);
+            equalAmountElement.innerHTML = `Per Person: $${equalAmount}`;
+            if(arrOfEntries.length > 1){
+                btnCalculate.style.display = "inline-block";
+            }
+        })
+    });
     
     total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
     totalSpentElement.innerHTML = `Total: $${total.toFixed(2)}`;
@@ -52,9 +107,6 @@ btnAddEntry.addEventListener("click", () => {
 
     nameInput.value = "";
     amountInput.value = "";
-
-    recalcEntries = [...arrOfEntries];
-
 });
 
 
@@ -110,15 +162,19 @@ function debtorsMore(array1, array2){
 btnCalculate.addEventListener("click", () => {
     
     document.getElementById("resultsBox").style.display = "flex";
-    document.getElementById("CalculateBtn").style.display = "none";
-    document.getElementById("StartOverBtn").style.display = "inline-block";
-    document.getElementById("name").style.display = "none";
-    document.getElementById("amount").style.display = "none";
-    document.getElementById("addEntryBtn").style.display = "none";
-    // document.querySelector("label").style.display = "none";
-    // document.getElementById("editBtn").style.display = "none";
-    // let node = document.getElementById("editBtn");
-    // if (node.parentNode){node.parentNode.removeChild(node)}
+    btnCalculate.style.display = "none";
+    btnStartOver.style.display = "inline-block";
+    nameInput.style.display = "none";
+    amountInput.style.display = "none";
+    btnAddEntry .style.display = "none";
+
+    const listItems = listOfEntries.getElementsByTagName("li");
+    for (let i = 0; i < listItems.length; i++){
+        const editButton = listItems[i].querySelector("#editBtn")
+        if(editButton){
+            editButton.remove();
+        }
+    }
     const equalAmount = (total / arrOfEntries.length).toFixed(2);
     arrOfEntries.forEach((entry) => {
     entry.balance = parseFloat((equalAmount - entry.amount).toFixed(2));
@@ -146,83 +202,24 @@ btnCalculate.addEventListener("click", () => {
     }    
 })
 
+// Adding event listener for Start Over button
 btnStartOver.addEventListener("click", () => {
 
     while(listOfEntries.firstChild) listOfEntries.removeChild(listOfEntries.firstChild);
     const ul = document.getElementById("tally");
     ul.style.display = "none";
     while(listOfResults.firstChild) listOfResults.removeChild(listOfResults.firstChild);
-
-    document.getElementById("name").style.display = "inline-block";
-    document.getElementById("amount").style.display = "inline-block";
-    document.getElementById("addEntryBtn").style.display = "inline-block";
+    nameInput.style.display = "inline-block";
+    amountInput.style.display = "inline-block";
+    btnAddEntry.style.display = "inline-block";
     document.getElementById("resultsBox").style.display = "none";
     document.getElementById("entriesBox").style.display = "none";
-    document.getElementById("StartOverBtn").style.display = "none";
+    btnStartOver.style.display = "none";
     arrOfEntries = [];
     total = 0;
 })
 
 
-
-//create editBtn
-    // const editBtn = document.createElement("button");
-    // editBtn.innerText = "Edit";
-    // editBtn.id = "editBtn";
-    // // editBtn.id = "update" + name;
-    // entry.appendChild(editBtn);
-
-    // // Add click event to editBtn
-    // editBtn.addEventListener("click", () => {
-
-    //     btnStartOver.style.display = "none";
-    //     btnCalculate.style.display = "inline-block";
-
-    //     entry.replaceChildren();
-    //     const inputName = document.createElement('input');
-    //     inputName.id = name;
-    //     inputName.type = "text";
-    //     inputName.value = name;
-    //     const inputAmount = document.createElement("input");
-    //     inputAmount.value = person.amount;
-    //     inputAmount.id = name;
-    //     inputAmount.type = "number";
-
-    //     // create saveBtn
-    //     const saveBtn = document.createElement("button");
-    //     saveBtn.innerText = "Save";
-    //     saveBtn.id = "save" + name;
-        
-    //     entry.appendChild(inputName);
-    //     entry.appendChild(inputAmount);
-    //     entry.appendChild(saveBtn);
-
-    //     // Add click event to saveBtn
-    //     saveBtn.addEventListener("click", () => {
-            
-    //         let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
-    //         const updatedName = inputName.value.trim();
-    //         const updatedAmount = parseFloat(inputAmount.value.trim());
-
-    //     if (!updatedName || isNaN(updatedAmount) || updatedAmount < 0) {
-    //         alert("Please enter a valid name and amount.");
-    //         return;
-    //     }
-
-    //         arrOfEntries[objIndex].name = updatedName;
-    //         arrOfEntries[objIndex].amount = updatedAmount;
-    //         entry.replaceChildren();           
-    //         entry.id = updatedName;
-    //         editBtn.id = "update" + updatedName;
-            
-    //         entry.innerHTML = `${updatedName} spent $${updatedAmount.toFixed(2)}`;
-    //         entry.appendChild(editBtn)
-    //         total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
-    //         totalSpentElement.innerHTML = `$${total.toFixed(2)}`;
-    //         const equalAmount = (total / arrOfEntries.length).toFixed(2);
-    //         equalAmountElement.innerHTML = `$${equalAmount}`;
-    //     })
-    // });
 
 
 
