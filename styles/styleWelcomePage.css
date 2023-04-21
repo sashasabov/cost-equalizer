@@ -94,19 +94,10 @@ p, h1 {
 
     main {
         height: 80vh;
-        width: 70%;
         min-width: 350px;
         min-height: 800px;
-        display: grid;
-        background-color:white;
         grid-template-rows: 1fr 0.2fr 1fr;
         grid-template-columns: 1fr 1fr;
-        justify-items: center;
-        align-items: center;
-        border: 3px solid black;
-        margin-top: 0;
-        border-radius: 25px;
-        box-shadow: 0 3px 10px black;
     }
     
     img {
@@ -129,13 +120,9 @@ p, h1 {
 
     section {
         height: 90%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
         grid-column: 2;
         grid-row-start: 1;
         grid-row-end: 2;
-        text-align: center;
     }
 
     aside {
@@ -151,20 +138,11 @@ p, h1 {
     #startBtnImg {
         min-width: 50%;
         transform: rotate(20deg);
-        border-radius: 50%;
-        background-color: black;
-        box-shadow: 0px 3px 3px black;
-        animation: mymove 2s infinite;
-    }
-
-    @keyframes mymove {
-        50% {box-shadow: 0 7px 10px black;}
     }
 
     p,h1 {
         line-height: 30px;
      }
-
 }
 
 @media screen and (max-height: 400px){
@@ -180,6 +158,10 @@ p, h1 {
         border-radius: 25px;
         width: auto;
         height: 150px;
+    }
+
+    #startBtnImg{
+        width: 60%;
     }
 
     #img-man {
@@ -198,13 +180,13 @@ p, h1 {
     }
 
     p {
-        line-height: 20px;
+        line-height: 15px;
         align-self: center;
      }
 
     h1 {
         line-height: 20px;
-        font-size: 18px;
-        margin-bottom: 2px;
+        font-size: 16px;
+        margin-bottom: 2vh;
     }
 }
