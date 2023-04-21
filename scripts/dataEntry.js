@@ -1,7 +1,7 @@
 
 const btnAddEntry = document.getElementById("addEntryBtn");
-const btnCalculate = document.getElementById("CalculateBtn");
-const btnStartOver = document.getElementById("StartOverBtn");
+const btnCalculate = document.getElementById("calculateBtn");
+const btnStartOver = document.getElementById("startOverBtn");
 const listOfEntries = document.getElementById("listOfEntries");
 const listOfResults = document.getElementById("listOfResults");
 const totalSpentElement = document.getElementById("total");
@@ -13,7 +13,6 @@ let arrOfEntries = [];
 
 // Adding event listener for AddEntry button
 btnAddEntry.addEventListener("click", () => {
-    
     let name = nameInput.value.trim();
     let amount = parseFloat(amountInput.value.trim());
 
@@ -22,19 +21,24 @@ btnAddEntry.addEventListener("click", () => {
         return;
     }
     document.getElementById("entriesBox").style.display = "flex";
+
+    // Create person object
     const person = { name, amount };
     const entry = document.createElement('li');
     entry.id = person.name;
-    // Check if there was no entry with the same name
+
+    // Check if entry with same name exist
     if(arrOfEntries.some(e => e.name == name) == true){
-    const entryToUpdate = arrOfEntries.find(entry => entry.name == name)
-    entryToUpdate.amount += person.amount;
-    document.getElementById(name).innerHTML = `${person.name} spent $${entryToUpdate.amount.toFixed(2)}`;
+        alert("Entry with this name already exist.");
+        return;
     }
     else {
+        //create new entry element
         entry.innerHTML = `${person.name} spent $${person.amount.toFixed(2)}`;
         listOfEntries.appendChild(entry);
         arrOfEntries.push(person);
+
+        // Display calulate button and tally
         if(arrOfEntries.length > 0){
             document.getElementById("tally").style.display = "inline-block";
         }
@@ -42,29 +46,32 @@ btnAddEntry.addEventListener("click", () => {
             btnCalculate.style.display = "inline-block";
         }
     }
-
-    // Create editBtn
+    
+    // Create edit button
     const editBtn = document.createElement("button");
     editBtn.id = "editBtn";
     entry.appendChild(editBtn);
 
-    // Add click event to editBtn
+    // Add click event to edit button
     editBtn.addEventListener("click", () => {
-
         btnCalculate.style.display = "none";
         entry.replaceChildren();
+
+        //Create name input field
         const inputName = document.createElement('input');
         inputName.id = "editName";
         inputName.type = "text";
         inputName.value = name;
         inputName.style.width = ((inputName.value.length + 8) * 8) + 'px';
+
+        // Create amount input field
         const inputAmount = document.createElement("input");
-        inputAmount.value = person.amount;
+        inputAmount.value = amount;
         inputAmount.style.width = ((inputAmount.value.length + 8) * 8) + 'px';
         inputAmount.id = "editAmount";
         inputAmount.type = "number";
 
-        // create saveBtn
+        // create save button
         const saveBtn = document.createElement("button");
         saveBtn.id = "saveBtn"       
          
@@ -72,7 +79,7 @@ btnAddEntry.addEventListener("click", () => {
         entry.appendChild(inputAmount);
         entry.appendChild(saveBtn);
 
-        // Add click event to Save button
+        // Add click event to save button
         saveBtn.addEventListener("click", () => {
             
             let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
@@ -111,7 +118,6 @@ btnAddEntry.addEventListener("click", () => {
 
 
 function creditorsMore(array1, array2){
-
     array1.forEach((creditor) => {
         let amountOwed = Math.abs(creditor.balance);
         const debtorGreater = array2.find((debtor) => debtor.balance >= amountOwed);
@@ -135,7 +141,6 @@ function creditorsMore(array1, array2){
 }
 
 function debtorsMore(array1, array2){
-
     array1.forEach((debtor) => {
         let amountToReturn = debtor.balance;
         const creditorGreater = array2.find((creditor) => Math.abs(creditor.balance) >= amountToReturn);
@@ -158,7 +163,7 @@ function debtorsMore(array1, array2){
     }) 
 }
 
-// Adding event listener for Calculate button
+// Add event listener for calculate button
 btnCalculate.addEventListener("click", () => {
     
     document.getElementById("resultsBox").style.display = "flex";
@@ -202,7 +207,7 @@ btnCalculate.addEventListener("click", () => {
     }    
 })
 
-// Adding event listener for Start Over button
+// Adding event listener to restart button
 btnStartOver.addEventListener("click", () => {
 
     while(listOfEntries.firstChild) listOfEntries.removeChild(listOfEntries.firstChild);

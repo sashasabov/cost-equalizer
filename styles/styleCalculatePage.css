@@ -30,7 +30,7 @@ footer {
     margin: 2vh;
 }
 
-#CalculateBtn, #StartOverBtn {
+#calculateBtn, #startOverBtn {
     display: none;
 }
 
@@ -71,7 +71,7 @@ footer {
     margin-bottom: 2px;
 }
 
-#entriesBox, input, #addEntryBtn, #CalculateBtn, #StartOverBtn, #resultsBox {
+#entriesBox, input, #addEntryBtn, #calculateBtn, #startOverBtn, #resultsBox {
     border-radius: 15px;
     border: 3px solid black;
     box-shadow: 0 3px 3px black;
@@ -107,7 +107,7 @@ input:-webkit-autofill {
 -webkit-box-shadow: 0 0 0 50px white inset !important;
 }
 
-#addEntryBtn, #CalculateBtn, #StartOverBtn {
+#addEntryBtn, #calculateBtn, #startOverBtn {
     font-family: 'Geogia', Courier, monospace;
     height: 60px;
     color: white;
@@ -117,7 +117,7 @@ input:-webkit-autofill {
     text-align: center;
 }
 
-#CalculateBtn, #StartOverBtn {
+#calculateBtn, #startOverBtn {
     grid-row: 2;
     grid-column: 1;
     margin-top: 2px;
@@ -139,7 +139,7 @@ input:-webkit-autofill {
     margin-bottom: 2px;
 }
 
-#StartOverBtn {
+#startOverBtn {
     grid-row: 2;
     grid-column: 1;
     align-self: end;
@@ -216,14 +216,14 @@ li {
         width: 60px;
     }
 
-    #CalculateBtn, #StartOverBtn{
+    #calculateBtn, #startOverBtn{
         margin-bottom: 30px; 
     }
 }
 
 @media screen and (max-height: 400px){
 
-    #CalculateBtn, #StartOverBtn {
+    #calculateBtn, #startOverBtn {
         height: 45px;
         margin-bottom: 3vh;
     }
