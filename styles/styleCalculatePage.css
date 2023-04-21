@@ -211,3 +211,13 @@ li {
     }
 }
 
+@media screen and (max-height: 400px){
+
+    #CalculateBtn, #StartOverBtn {
+        height: 40px;
+        /* font-size: 15px; */
+        /* position: relative; */
+        margin-bottom: 2vh;
+    }
+}
+
