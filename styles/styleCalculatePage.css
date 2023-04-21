@@ -4,8 +4,9 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #a7744e;
-    padding: 3vh 0;
+    padding: 2vh 0;
     text-align: center;
+    flex-direction: column;
 }
 
 main {
@@ -23,6 +24,10 @@ main {
     background-image: url(".././assets/background-pencils.png");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+footer {
+    margin: 2vh;
 }
 
 #CalculateBtn, #StartOverBtn {
@@ -86,12 +91,11 @@ input {
 
 #amount{
     width: 200px;
-    margin-bottom: 5px;
 }
 
 #name {
     width: 300px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 input:focus{
@@ -196,6 +200,10 @@ li {
     border-bottom-style: none;
     margin: 0 0;
 }
+
+/* footer {
+    margin-bottom: 0;
+} */
 
 @media screen and (min-width: 650px){
 
