@@ -54,7 +54,7 @@ p,h1 {
     align-self: center;
  }
 
- a{
+ a {
     margin-bottom: 10px;
 }
 
@@ -102,7 +102,7 @@ p, h1 {
     
     img {
         border-radius: 25px;
-        width: 80%;
+        width: 70%;
         height: auto;
     }
     
@@ -177,12 +177,17 @@ p, h1 {
         display: block;
         height: 80%;
         font-size: small;
+        margin-right: 0;
     }
 
     p {
         line-height: 15px;
         align-self: center;
+        margin-top: 5px;
+        margin-bottom: 0;
+        /* width: 33vw; */
      }
+
 
     h1 {
         line-height: 20px;
