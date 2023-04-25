@@ -79,7 +79,7 @@ p,h1 {
 }
 
 @keyframes mymove {
-    50% {box-shadow: 0 7px 10px black;}
+    50% {box-shadow: 0 8px 10px black;}
 }
 
 aside {

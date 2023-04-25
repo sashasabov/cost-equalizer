@@ -83,26 +83,36 @@ btnAddEntry.addEventListener("click", () => {
         saveBtn.addEventListener("click", () => {
             
             let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
-            name = inputName.value.trim();
-            amount = parseFloat(inputAmount.value.trim());
-
-        if (!name || isNaN(amount) || amount < 0) {
-            alert("Please enter a valid name and amount.");
-            return;
-        }
+            const newName = inputName.value.trim();
+            const newAmount = parseFloat(inputAmount.value.trim());
             
-            arrOfEntries[objIndex].name = name;
-            arrOfEntries[objIndex].amount = amount;
-            entry.replaceChildren();           
-            entry.id = name;
-            entry.innerHTML = `${name} spent $${amount.toFixed(2)}`;
-            entry.appendChild(editBtn)
-            total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
-            totalSpentElement.innerHTML = `Total: $${total.toFixed(2)}`;
-            const equalAmount = (total / arrOfEntries.length).toFixed(2);
-            equalAmountElement.innerHTML = `Per Person: $${equalAmount}`;
-            if(arrOfEntries.length > 1){
-                btnCalculate.style.display = "inline-block";
+            console.log(name, amount)
+
+            if (!newName || isNaN(newAmount) || newAmount < 0) {
+                alert("Please enter a valid name and amount.");
+                return;
+            }
+            else if(arrOfEntries.some(e => e.name == newName) == true){
+                alert("Entry with this name already exist.");
+                return;
+            }
+            else {
+                name = newName;
+                amount = newAmount;
+                console.log(arrOfEntries)
+                arrOfEntries[objIndex].name = name;
+                arrOfEntries[objIndex].amount = amount;
+                entry.replaceChildren();           
+                entry.id = name;
+                entry.innerHTML = `${name} spent $${amount.toFixed(2)}`;
+                entry.appendChild(editBtn)
+                total = arrOfEntries.reduce((sum, entry) => sum + entry.amount, 0);
+                totalSpentElement.innerHTML = `Total: $${total.toFixed(2)}`;
+                const equalAmount = (total / arrOfEntries.length).toFixed(2);
+                equalAmountElement.innerHTML = `Per Person: $${equalAmount}`;
+                if(arrOfEntries.length > 1){
+                    btnCalculate.style.display = "inline-block";
+                }
             }
         })
     });
