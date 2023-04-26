@@ -85,14 +85,15 @@ btnAddEntry.addEventListener("click", () => {
             let objIndex = arrOfEntries.findIndex((entry) => entry.name == name && entry.amount == amount);
             const newName = inputName.value.trim();
             const newAmount = parseFloat(inputAmount.value.trim());
-            
-            console.log(name, amount)
+            const subArray = arrOfEntries.map(e => e)
+            console.log(subArray)
+            subArray.splice(objIndex, 1)
 
             if (!newName || isNaN(newAmount) || newAmount < 0) {
                 alert("Please enter a valid name and amount.");
                 return;
             }
-            else if(arrOfEntries.some(e => e.name == newName) == true){
+            else if (subArray.some(e => e.name == newName) == true){
                 alert("Entry with this name already exist.");
                 return;
             }

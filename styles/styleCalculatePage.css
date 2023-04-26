@@ -86,15 +86,17 @@ input {
     box-sizing: border-box;
     background-color: white;
     outline: none;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #amount{
-    width: 200px;
+    /* width: 200px; */
+    width: 20%;
 }
 
 #name {
-    width: 300px;
+    /* width: 300px; */
+    width: 30%;
     margin-bottom: 20px;
 }
 
@@ -124,7 +126,7 @@ input:-webkit-autofill {
     margin-bottom: 5vh;
     align-self: end;
     width: 200px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 #addEntryBtn:focus {
@@ -132,7 +134,7 @@ input:-webkit-autofill {
 }
 
 #addEntryBtn{
-    font-size: 40px;
+    font-size: 50px;
     width: 60px;
     padding: 0;
     margin-bottom: 2px;
@@ -207,16 +209,16 @@ li {
     }
 
     #addEntryBtn {
-        height: 70px;
-        width: 70px;
+        height: 10vh;
+        width: 10vh;
     }
 
     #calculateBtn, #startOverBtn{
         margin-bottom: 30px; 
     }
 
-    input{
-    height: 70px;
+    input {
+        height: 10vh;
     }
 
     #listOfEntries, #listOfResults{
