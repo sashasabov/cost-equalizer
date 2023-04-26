@@ -125,7 +125,7 @@ input:-webkit-autofill {
     margin-bottom: 5vh;
     align-self: end;
     width: 200px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #addEntryBtn:focus {
@@ -159,6 +159,7 @@ input:-webkit-autofill {
     align-self: center;
     font-size: 16px;
     overflow: hidden;
+    resize:both;
 }
 
 #resultsBox {

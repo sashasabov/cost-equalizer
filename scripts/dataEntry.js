@@ -134,6 +134,12 @@ function creditorsMore(array1, array2){
         const debtorGreater = array2.find((debtor) => debtor.balance >= amountOwed);
         const debtorLess = array2.find((debtor) => debtor.balance < amountOwed);
 
+        // if(amountOwed == 0){
+        //     const result = document.createElement("li");
+        //     result.innerHTML = "Bill is already split evenly! Are you testing my app? ;)";
+        //     listOfResults.appendChild(result);
+        // }
+        // else 
         if (debtorGreater) {
             debtorGreater.balance -= amountOwed;
             creditor.balance = 0; 
@@ -156,7 +162,13 @@ function debtorsMore(array1, array2){
         let amountToReturn = debtor.balance;
         const creditorGreater = array2.find((creditor) => Math.abs(creditor.balance) >= amountToReturn);
         const creditorLess = array2.find((creditor) => Math.abs(creditor.balance) < amountToReturn);
-                    
+        
+        // if(amountToReturn == 0 && listOfResults.style.length == 0){
+        //     const result = document.createElement("li");
+        //     result.innerHTML = "Bill is already split! Are you testing my app? ;)";
+        //     listOfResults.appendChild(result);
+        // }
+        // else 
         if (creditorGreater) {
             creditorGreater.balance += amountToReturn;
             debtor.balance = 0; 
@@ -197,8 +209,15 @@ btnCalculate.addEventListener("click", () => {
     });
     const creditors = arrOfEntries.filter((entry) => entry.balance < 0);
     const debtors = arrOfEntries.filter((entry) => entry.balance >= 0);
+
+    if ((arrOfEntries.every(entry => entry.amount == equalAmount)) == true){
+        const result = document.createElement("li");
+        result.innerHTML = "Bill is already split evenly!";
+        result.style.textAlign = "center";
+        listOfResults.appendChild(result);
+    }
        
-    if (creditors.length >= debtors.length){
+    else if (creditors.length >= debtors.length){
         creditorsMore(creditors, debtors);   
     }
 
