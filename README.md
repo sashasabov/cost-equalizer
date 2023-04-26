@@ -9,7 +9,7 @@ This app is designed to help user to even out expenses.
 ## MVP User stories
 - As a user, I would like be able to enter people's names. 
 - As a user, I would like be able to enter amount spent across from people's names.
-- As a user, I would like be able to calculate how much each person owes and to whome.
+- As a user, I would like be able to calculate how much each person owes and to whom.
 
 *Stretch Goals*
 - As a user, I would like software to be able to scan reseipt and upload total spent. 
