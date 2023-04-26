@@ -40,17 +40,24 @@ Welcome Page
 
 
 
-Data Entry View on Calculate page›
+Input Data View on Calculate page
 <img width="1296" alt="Screen Shot 2023-04-26 at 4 55 13 PM" src="https://user-images.githubusercontent.com/101619380/234700295-b818ba32-e226-46a5-8bd6-1b4251c53579.png">
 
 
-Results Page
+
+Entered Data View on Calculate page
+<img width="1220" alt="Screen Shot 2023-04-26 at 4 56 52 PM" src="https://user-images.githubusercontent.com/101619380/234700876-90b26d4e-c2c7-4378-8cbd-4a9968ec63ca.png">
+
+
+
+Results View on Calculate page
 
 
 Acknowledgement Page
 
 This app was inspired by my mother-in-law, who was the one doing the job of calculating equal bill splitt after every vacation. I hope it will make her life easier.
 
+<img width="1241" alt="Screen Shot 2023-04-26 at 4 57 12 PM" src="https://user-images.githubusercontent.com/101619380/234700987-c17e5138-08f9-4e62-bdf2-555082ce6d57.png">
 
 
 @ 2023 SashaSabov
