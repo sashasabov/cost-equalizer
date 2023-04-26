@@ -57,6 +57,7 @@ footer {
     margin: 5px;
     text-align: center;
     height: 40px;
+    font-size: 16px;
 }
 
 .input-box {
@@ -86,17 +87,15 @@ input {
     box-sizing: border-box;
     background-color: white;
     outline: none;
-    font-size: 30px;
+    font-size: 20px;
 }
 
-#amount{
-    /* width: 200px; */
-    width: 20%;
+#amount {
+    width: 200px;
 }
 
 #name {
-    /* width: 300px; */
-    width: 30%;
+    width: 300px;
     margin-bottom: 20px;
 }
 
@@ -134,7 +133,7 @@ input:-webkit-autofill {
 }
 
 #addEntryBtn{
-    font-size: 50px;
+    font-size: 45px;
     width: 60px;
     padding: 0;
     margin-bottom: 2px;
@@ -209,8 +208,21 @@ li {
     }
 
     #addEntryBtn {
-        height: 10vh;
-        width: 10vh;
+        height: 8vh;
+        width: 8vh;
+    }
+
+    #amount {
+        width: 20%;
+    }
+    
+    #name {
+        width: 30%;
+        margin-bottom: 20px;
+    }
+
+    #editName, #editAmount {
+        font-size: 20px;
     }
 
     #calculateBtn, #startOverBtn{
@@ -218,7 +230,8 @@ li {
     }
 
     input {
-        height: 10vh;
+        height: 8vh;
+        font-size: 25px;
     }
 
     #listOfEntries, #listOfResults{
@@ -230,8 +243,23 @@ li {
 @media screen and (max-height: 400px){
 
     #calculateBtn, #startOverBtn {
-        height: 45px;
+        height: 50px;
         margin-bottom: 3vh;
+    }
+
+    input {
+        margin-top: 5px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    #addEntryBtn {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 5px;
+        font-size: 30px;
     }
 
     #amount {
