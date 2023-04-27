@@ -54,7 +54,7 @@ p,h1 {
     align-self: center;
  }
 
- a {
+a {
     margin-bottom: 10px;
 }
 
@@ -70,7 +70,7 @@ p,h1 {
 
  #startBtnImg {
     width: 40%;
-    max-width: 40vw;
+    max-width: 30vw;
     object-fit: cover;
     transform: rotate(20deg);
     border-radius: 50%;
@@ -90,8 +90,6 @@ aside {
 p, h1 {
     line-height: 100%;
 }
-
-
 
 @media screen and (max-height: 620px){
 
@@ -115,7 +113,6 @@ p, h1 {
 
     #img-man {
         margin-bottom: 0;
-       
     }
 
     section {
@@ -177,13 +174,12 @@ p, h1 {
 
     .welcome {
         margin-top: 0;
-        font-size: 18px;
-        /* font-size: 20px; */
-        /* align-self: start; */
+        margin-bottom: 20px;
+        font-size: 20px;
     }
 
     a {
-    margin-bottom: 0;
+        margin-bottom: 0;
     }
 
 }
@@ -234,7 +230,7 @@ p, h1 {
 
     aside {
         display: block;
-        max-height: 80%;
+        max-height: 90%;
         font-size: 16px;
         grid-column: 1;
         grid-row-start: 2;
@@ -244,6 +240,7 @@ p, h1 {
 
     #startBtnImg {
         min-width: 50%;
+        max-width: 20vh;
         transform: rotate(20deg);
         max-width: 28vw;
     }
@@ -252,10 +249,12 @@ p, h1 {
         line-height: 2.2vw;
         margin-top: 0;
         font-weight:bolder;
+        
      }
 
      .welcome {
-        font-size: larger;
+        font-size: 25px;
         margin-top: 8px;
+        line-height: 3vw;
     }
 }
