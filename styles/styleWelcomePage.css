@@ -70,6 +70,7 @@ p,h1 {
 
  #startBtnImg {
     width: 40%;
+    max-width: 30vw;
     object-fit: cover;
     transform: rotate(20deg);
     border-radius: 50%;
@@ -109,6 +110,7 @@ p, h1 {
 
     #startBtnImg{
         width: 60%;
+        max-width: 30vw;
     }
 
     #img-man {
